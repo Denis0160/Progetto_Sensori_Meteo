@@ -1,0 +1,12 @@
+
+            {
+                "ts":1773143700000,
+                "values":{
+                    "temperature":150,
+                    "humidity":20, 
+                    "pressure":1032,
+                    "wind":15,
+                    "rain": 2,
+                    "dust": 102
+                }
+            }
