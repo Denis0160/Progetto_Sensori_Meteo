@@ -9,7 +9,7 @@
     "additionalInfo": null
   },
   "metadata": {
-    "version": 3,
+    "version": 7,
     "firstNodeIndex": 6,
     "nodes": [
       {
@@ -27,8 +27,8 @@
           }
         },
         "additionalInfo": {
-          "layoutX": 1071,
-          "layoutY": 278
+          "layoutX": 1221,
+          "layoutY": 285
         }
       },
       {
@@ -169,19 +169,19 @@
       },
       {
         "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
-        "name": "rule chain",
+        "name": "controllo valori",
         "debugSettings": null,
         "singletonMode": false,
         "queueName": null,
         "configurationVersion": 1,
         "configuration": {
           "forwardMsgToDefaultRuleChain": false,
-          "ruleChainId": "c1287370-1c6e-11f1-b0fa-13069a1cfc9d"
+          "ruleChainId": "c33742b0-3c8d-11f1-b174-255c03e1b993"
         },
         "additionalInfo": {
           "description": "",
-          "layoutX": 830,
-          "layoutY": 284
+          "layoutX": 915,
+          "layoutY": 289
         }
       }
     ],

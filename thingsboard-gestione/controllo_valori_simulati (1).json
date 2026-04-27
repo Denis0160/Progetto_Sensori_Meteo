@@ -1,0 +1,267 @@
+{
+  "ruleChain": {
+    "name": "controllo valori simulati",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null,
+    "additionalInfo": {
+      "description": ""
+    }
+  },
+  "metadata": {
+    "version": 12,
+    "firstNodeIndex": 0,
+    "nodes": [
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbJsSwitchNode",
+        "name": "controllo soglie",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 1777278421003
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "JS",
+          "jsScript": "const MAXTEMPERATURE = 100;\r\nconst MINTEMPERATURE = -20;\r\n\r\nconst MAXHUMIDITY = 100;\r\nconst MINHUMIDITY = 0;\r\n\r\nconst MAXPRESSURE = 1080;\r\nconst MINPRESSURE = 900;\r\n\r\nconst MAXWIND = 150;\r\nconst MINWIND = 0;\r\n\r\nconst MAXRAIN = 500;\r\nconst MINRAIN = 0;\r\n\r\nconst MAXDUST = 500;\r\nconst MINDUST = 0;\r\n\r\n/* declare list to add cases */\r\nvar output = [];\r\noutput.push(\"ok\");\r\n\r\nif (\"temperature\" in msg && (msg.temperature > MAXTEMPERATURE || msg.temperature < MINTEMPERATURE)) {\r\n\r\n    output.push(\"wrong_temperature\");\r\n\r\n}\r\n\r\n\r\n\r\nif (\"humidity\" in msg && (msg.humidity > MAXHUMIDITY || msg.humidity < MINHUMIDITY)) {\r\n\r\n    output.push(\"wrong_humidity\");\r\n\r\n}\r\n\r\n\r\n\r\nif (\"pressure\" in msg && (msg.pressure > MAXPRESSURE || msg.pressure < MINPRESSURE)) {\r\n\r\n    output.push(\"wrong_pressure\");\r\n\r\n}\r\n\r\n\r\n\r\nif (\"wind\" in msg && (msg.wind > MAXWIND || msg.wind < MINWIND)) {\r\n\r\n    output.push(\"wrong_wind\");\r\n\r\n}\r\n\r\n\r\n\r\nif (\"rain\" in msg && (msg.rain > MAXRAIN || msg.rain < MINRAIN)) {\r\n\r\n    output.push(\"wrong_rain\");\r\n\r\n}\r\n\r\n\r\n\r\nif (\"dust\" in msg && (msg.dust > MAXDUST || msg.dust < MINDUST)) {\r\n\r\n    output.push(\"wrong_dust\");\r\n\r\n}\r\n\r\nreturn output;",
+          "tbelScript": "function nextRelation(metadata, msg) {\n    return ['one','nine'];\n}\nif(msgType == 'POST_TELEMETRY_REQUEST') {\n    return ['two'];\n}\nreturn nextRelation(metadata, msg);"
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 312,
+          "layoutY": 446
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Allarme Temperature",
+        "debugSettings": {
+          "failuresEnabled": false,
+          "allEnabled": false,
+          "allEnabledUntil": 1777277640917
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "scriptLang": "TBEL",
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "useMessageAlarmData": false,
+          "overwriteAlarmDetails": false,
+          "alarmType": "Wrong Temperature",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "relationTypes": [],
+          "propagateToOwner": false,
+          "propagateToOwnerHierarchy": false,
+          "propagateToTenant": false,
+          "dynamicSeverity": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 726,
+          "layoutY": 307
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainOutputNode",
+        "name": "output",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "version": 0
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1147,
+          "layoutY": 440
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Allarme Umidità",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "alarmType": "General Alarm",
+          "scriptLang": "TBEL",
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "propagateToOwner": false,
+          "propagateToOwnerHierarchy": false,
+          "propagateToTenant": false,
+          "useMessageAlarmData": false,
+          "overwriteAlarmDetails": false,
+          "dynamicSeverity": false,
+          "relationTypes": []
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 658,
+          "layoutY": 700
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Allarme Pressione",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "alarmType": "General Alarm",
+          "scriptLang": "TBEL",
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "propagateToOwner": false,
+          "propagateToOwnerHierarchy": false,
+          "propagateToTenant": false,
+          "useMessageAlarmData": false,
+          "overwriteAlarmDetails": false,
+          "dynamicSeverity": false,
+          "relationTypes": []
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 741,
+          "layoutY": 548
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Allarme Vento",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "alarmType": "General Alarm",
+          "scriptLang": "TBEL",
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "propagateToOwner": false,
+          "propagateToOwnerHierarchy": false,
+          "propagateToTenant": false,
+          "useMessageAlarmData": false,
+          "overwriteAlarmDetails": false,
+          "dynamicSeverity": false,
+          "relationTypes": []
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 375,
+          "layoutY": 750
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Allarme Pioggia",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "alarmType": "General Alarm",
+          "scriptLang": "TBEL",
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "propagateToOwner": false,
+          "propagateToOwnerHierarchy": false,
+          "propagateToTenant": false,
+          "useMessageAlarmData": false,
+          "overwriteAlarmDetails": false,
+          "dynamicSeverity": false,
+          "relationTypes": []
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 678,
+          "layoutY": 92
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Allarme Polveri",
+        "debugSettings": null,
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "alarmType": "General Alarm",
+          "scriptLang": "TBEL",
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "alarmDetailsBuildTbel": "var details = {};\nif (metadata.prevAlarmDetails != null) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    metadata.remove('prevAlarmDetails');\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "severity": "CRITICAL",
+          "propagate": false,
+          "propagateToOwner": false,
+          "propagateToOwnerHierarchy": false,
+          "propagateToTenant": false,
+          "useMessageAlarmData": false,
+          "overwriteAlarmDetails": false,
+          "dynamicSeverity": false,
+          "relationTypes": []
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 438,
+          "layoutY": 30
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 1,
+        "type": "wrong_temperature"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 2,
+        "type": "ok"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 3,
+        "type": "wrong_humidity"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 4,
+        "type": "wrong_pressure"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 5,
+        "type": "wrong_wind"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 6,
+        "type": "wrong_rain"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 7,
+        "type": "wrong_dust"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}
