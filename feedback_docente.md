@@ -33,3 +33,30 @@ Gruppo: Sescu – Giatti – Malachin – Cosmi
 Il documento mostra una buona comprensione del dominio applicativo e degli obiettivi generali del sistema, ma soffre di una separazione non sempre netta tra requisiti, funzionalità e scelte tecniche. In un contesto progettuale o lavorativo, è fondamentale isolare chiaramente cosa il sistema deve garantire (requisiti), come si comporta dal punto di vista logico-funzionale (funzionale) e come viene realizzato concretamente (tecnica).
 
 L’assenza iniziale di questa distinzione rende più difficile valutare completezza, verificabilità e coerenza dell’architettura backend. La riorganizzazione incrementale delle osservazioni va nella direzione corretta e costituisce una base solida per una successiva revisione progettuale più strutturata.
+
+# Feedback Docente – Project Plan e Diagramma di Gantt  
+Gruppo: Sescu – Giatti – Malachin – Cosmi
+
+---
+
+## Project Plan
+
+- Il Project Plan risulta più organizzato rispetto alla versione precedente e riporta una suddivisione delle attività tra i membri del gruppo, migliorando la leggibilità dell’organizzazione interna del lavoro.
+
+- Le attività descritte restano però troppo generiche e aggregate: in molti casi non è possibile distinguere chiaramente compiti, deliverable e obiettivi verificabili delle singole fasi operative.
+
+- La pianificazione descrive il progetto in modo prevalentemente narrativo, ma manca ancora una struttura realmente orientata alla gestione operativa del lavoro (attività misurabili, stato di avanzamento, verifica dei risultati ottenuti).
+
+- La distribuzione dei compiti è presente, ma le responsabilità operative non risultano sempre sufficientemente isolate: alcune attività coinvolgono più persone senza chiarire responsabilità principali e output attesi.
+
+---
+
+## Diagramma di Gantt
+
+- Il diagramma di Gantt rappresenta le macrofasi del progetto, ma le attività risultano ancora troppo ampie e poco dettagliate per poter essere utilizzate come strumento reale di pianificazione e monitoraggio.
+
+- Non è sempre chiaro quali attività siano assegnate ai singoli membri del gruppo e come il lavoro sia distribuito nel tempo tra le diverse componenti del progetto.
+
+- La pianificazione temporale non appare completamente aggiornata rispetto allo stato reale del progetto: alcune attività risultano temporalmente superate senza una revisione evidente del diagramma.
+
+- Il Gantt descrive la sequenza generale delle attività, ma non evidenzia in modo sufficientemente chiaro dipendenze operative, sovrapposizioni e avanzamento effettivo delle fasi di lavoro.
